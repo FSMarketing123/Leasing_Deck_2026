@@ -1,0 +1,35 @@
+# Publishes the live deck to GitHub Pages on every push to main.
+# To publish a different deck, change SITE_DIR to that deck's 05_Site folder.
+name: Deploy deck to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+env:
+  SITE_DIR: 04_Decks/2026-10_tampa-retail-landlord-rep/05_Site
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ env.SITE_DIR }}
+      - id: deployment
+        uses: actions/deploy-pages@v4
