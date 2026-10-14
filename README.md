@@ -3,6 +3,8 @@
 Scroll-and-clicker landing-page decks for Franklin Street retail landlord representation,
 based on fstamparetail.netlify.app.
 
+**Live deck:** https://fsmarketing123.github.io/Leasing_Deck_2026/
+
 **Start here:** [START-HERE.md](START-HERE.md)
 
 | Folder | What it is |
@@ -24,6 +26,10 @@ bash tools/preview.sh 04_Decks/2026-10_tampa-retail-landlord-rep/05_Site
 Then open http://localhost:8080.
 
 ## Publish
+
+Every push to `main` republishes the live deck to GitHub Pages (https://fsmarketing123.github.io/Leasing_Deck_2026/) via `.github/workflows/deploy-pages.yml`.
+To publish a different deck, change `SITE_DIR` in that file.
+
 
 Deploy `04_Decks/2026-10_tampa-retail-landlord-rep/05_Site` to Netlify (drag and drop, or connect this repo and set
 the publish directory to that folder). See `00_Guide/06_Publish-to-Netlify.md`.

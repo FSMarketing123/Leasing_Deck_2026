@@ -11,7 +11,7 @@
 | Property | Portfolio / capabilities — not property-specific |
 | Meeting / send date | |
 | Approver | |
-| Live URL | https://fstamparetail.netlify.app/ |
+| Live URL | https://fsmarketing123.github.io/Leasing_Deck_2026/ (GitHub Pages) · original: https://fstamparetail.netlify.app/ |
 | Netlify site name | fstamparetail |
 | Current version | v1.0 |
 

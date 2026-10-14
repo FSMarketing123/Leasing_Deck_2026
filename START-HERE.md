@@ -60,5 +60,7 @@ Or open this folder in Claude Code and ask in plain English — it knows these t
 
 ## The live site today
 
+Live on GitHub Pages: https://fsmarketing123.github.io/Leasing_Deck_2026/ (republishes on every push to `main`).
+
 The current site is filed as `04_Decks/2026-10_tampa-retail-landlord-rep/`.
 Its `05_Site` folder is an exact, editable rebuild of fstamparetail.netlify.app.
