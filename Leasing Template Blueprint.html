@@ -1,0 +1,350 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Leasing Template Blueprint</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a single reading column (blueprint sheet) with a sticky contents rail on wide screens; Franklin Street brand tokens */
+:root{
+  --bg:#f7f6f2; --surface:#ffffff; --ink:#003349; --muted:#4f6b78; --line:rgba(0,51,73,.14);
+  --accent:#C6D83B; --teal:#005670; --sky:#7BA7BC; --code-bg:#0b2a3a; --code-fg:#e6eef2; --dark-block:#003349; --light-block:#e9ecea;
+  --display:'Libre Baskerville',Georgia,'Times New Roman',serif;
+  --body:Arial,Helvetica,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#06212e; --surface:#0b2c3c; --ink:#eef2ef; --muted:#a9bec8; --line:rgba(238,242,239,.14);
+  --teal:#7BC4D8; --sky:#9cc0d0; --code-bg:#021721; --code-fg:#dfe9ee; --dark-block:#174a61; --light-block:#2a4654; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#06212e; --surface:#0b2c3c; --ink:#eef2ef; --muted:#a9bec8; --line:rgba(238,242,239,.14);
+  --teal:#7BC4D8; --sky:#9cc0d0; --code-bg:#021721; --code-fg:#dfe9ee; --dark-block:#174a61; --light-block:#2a4654; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;margin:0}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:clamp(16px,4vw,48px);padding-block:56px 96px;display:grid;grid-template-columns:220px minmax(0,1fr);gap:56px}
+@media(max-width:900px){.wrap{grid-template-columns:minmax(0,1fr);gap:24px}.toc{position:static!important}}
+.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 24px);align-self:start;display:flex;flex-direction:column;gap:6px;font-size:13px}
+.toc b{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.toc a{color:var(--ink);text-decoration:none;padding:4px 0;border-left:2px solid transparent;padding-left:10px}
+.toc a:hover,.toc a:focus-visible{border-left-color:var(--accent);outline:none}
+main{min-width:0;display:flex;flex-direction:column;gap:72px}
+.ey{font-size:12px;font-weight:700;letter-spacing:.32em;text-transform:uppercase;color:var(--teal);display:flex;align-items:center;gap:14px}
+.ey::after{content:'';width:40px;height:2px;background:var(--accent);border-radius:1px}
+h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0;letter-spacing:-.01em}
+h1{font-size:clamp(38px,5.5vw,64px);line-height:1.05}
+h1 em,h2 em{color:var(--teal)}
+h2{font-size:clamp(26px,3vw,36px);line-height:1.15}
+h3{font-size:19px}
+p{margin:0;max-width:68ch}
+.lede{font-size:18px;color:var(--muted)}
+section{display:flex;flex-direction:column;gap:20px;scroll-margin-top:24px}
+.meta{display:flex;flex-wrap:wrap;gap:10px}
+.chip{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--line);padding:6px 12px;border-radius:2px}
+.chip.on{background:var(--accent);color:#003349;border-color:var(--accent)}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+@media(max-width:760px){.grid2,.grid3{grid-template-columns:minmax(0,1fr)}}
+.card{background:var(--surface);border:1px solid var(--line);padding:22px 24px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.card h3{font-size:17px}
+.card ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;color:var(--muted);font-size:14px}
+.card ul strong{color:var(--ink)}
+code,.mono{font-family:var(--mono);font-size:.88em}
+p code,li code,td code{background:var(--light-block);padding:1px 6px;border-radius:2px;color:var(--ink)}
+pre{margin:0;background:var(--code-bg);color:var(--code-fg);padding:20px 22px;overflow-x:auto;font-family:var(--mono);font-size:13px;line-height:1.65;border-left:3px solid var(--accent)}
+pre .c{color:#8fb3c4} pre .k{color:#C6D83B} pre .s{color:#f2c98a}
+.tbl{overflow-x:auto;border:1px solid var(--line);background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:640px}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:700}
+tr:last-child td{border-bottom:0}
+td.n{font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--muted)}
+/* page strip */
+.strip{display:grid;grid-template-columns:minmax(0,180px) minmax(0,1fr);gap:28px;align-items:start}
+@media(max-width:620px){.strip{grid-template-columns:minmax(0,1fr)}}
+.bars{display:flex;flex-direction:column;gap:2px;border:1px solid var(--line);padding:2px;background:var(--surface)}
+.bar{display:flex;align-items:center;padding:0 10px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;overflow:hidden;white-space:nowrap}
+.bar.d{background:var(--dark-block);color:#eef2ef}.bar.l{background:var(--light-block);color:var(--ink)}
+.bar.pin{background-image:repeating-linear-gradient(135deg,transparent 0 8px,rgba(198,216,59,.28) 8px 9px)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--muted)}
+.legend i{display:inline-block;width:14px;height:10px;margin-right:6px;vertical-align:middle;border:1px solid var(--line)}
+.flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:2px}
+@media(max-width:760px){.flow{grid-template-columns:minmax(0,1fr)}}
+.step{background:var(--surface);border:1px solid var(--line);padding:18px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.step .num{font-family:var(--display);font-size:28px;color:var(--teal);line-height:1}
+.step b{font-size:14px}
+.step span{font-size:13px;color:var(--muted)}
+.step code{font-size:11px;word-break:break-word}
+.rules{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line)}
+.rule{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:24px;padding:14px 0;border-bottom:1px solid var(--line);font-size:14px}
+.rule b{font-weight:700}
+.rule span{color:var(--muted)}
+@media(max-width:620px){.rule{grid-template-columns:minmax(0,1fr);gap:4px}}
+a{color:var(--teal)}
+@media (prefers-reduced-motion: reduce){*{scroll-behavior:auto!important}}
+</style>
+
+<div class="wrap">
+  <nav class="toc" aria-label="Contents">
+    <b>Contents</b>
+    <a href="#done">Work done</a>
+    <a href="#folders">Folder structure</a>
+    <a href="#files">Site files</a>
+    <a href="#anatomy">Page anatomy</a>
+    <a href="#html">HTML patterns</a>
+    <a href="#flow">Deck workflow</a>
+    <a href="#rules">Rules to remember</a>
+    <a href="#cm">Capital Markets next</a>
+  </nav>
+
+  <main>
+    <header style="display:flex;flex-direction:column;gap:22px">
+      <div class="ey">Franklin Street Decks</div>
+      <h1>Leasing Template <em>Blueprint.</em></h1>
+      <p class="lede">How the retail leasing deck is built: the folders, the code, every section of the page, and the rules for building new decks from it. This is the foundation for the Capital Markets template.</p>
+      <div class="meta">
+        <span class="chip on">Leasing v2.2 · locked</span>
+        <span class="chip">14 Oct 2026</span>
+        <span class="chip">11 sections</span>
+        <span class="chip">61 assets · 15 MB</span>
+        <span class="chip">No build step</span>
+      </div>
+    </header>
+
+    <section id="done">
+      <div class="ey">Work done</div>
+      <h2>From one 22 MB file to an <em>editable template.</em></h2>
+      <p>The live site at fstamparetail.netlify.app was a single bundled file with every image, video, font and script encoded inside it. It was unpacked into normal, named files, matched against the original, then refined section by section.</p>
+      <div class="grid2">
+        <div class="card"><h3>Rebuild</h3><ul>
+          <li>Decoded 65 embedded files into named assets (<code>alex-wright.jpg</code>, <code>hero-bg.jpg</code>)</li>
+          <li>Split styles into 3 CSS files and scripts into 3 JS files</li>
+          <li>Replaced 4 MB of design-tool code (React + Babel) with a 78-line <code>theme.js</code></li>
+          <li>Verified against the live site: identical page height (18,244 px) and section sizes</li>
+          <li>Carousel and tab counts now detected automatically (were fixed at 5)</li>
+        </ul></div>
+        <div class="card"><h3>Design refinements</h3><ul>
+          <li>Opening: navy screen, geometric pattern draws out from the logo (replaced lime + stair panels)</li>
+          <li>Section labels: bold tracked Arial, title then green dash</li>
+          <li>Geometric line pattern behind National Reach and Results That Speak</li>
+          <li>Kinetic band in EB Garamond + Arial; calmer motion</li>
+          <li>Every section on one 1360 px grid line; spacing fixes throughout</li>
+        </ul></div>
+        <div class="card"><h3>Content &amp; function</h3><ul>
+          <li>National Reach map enlarged beside the stats</li>
+          <li>Process tabs larger; headings on one line</li>
+          <li>Listings window shows only the Buildout listings, with a clear link to franklinst.com</li>
+          <li>Header logo links to franklinst.com</li>
+          <li>Logo rows: no side fades</li>
+        </ul></div>
+        <div class="card"><h3>System &amp; tools</h3><ul>
+          <li><strong>new-deck.sh</strong> starts a deck from any template</li>
+          <li><strong>check-deck.py</strong> catches missing files, tab/panel mismatches, TBDs, bad links</li>
+          <li><strong>preview.sh</strong> serves a deck locally</li>
+          <li><strong>unbundle.py</strong> converts any future single-file export</li>
+          <li>7 guides, 2 intake questionnaires, brand and team libraries, dated template backups</li>
+        </ul></div>
+      </div>
+    </section>
+
+    <section id="folders">
+      <div class="ey">Folder structure</div>
+      <h2>Everything lives in <em>Desktop/Decks.</em></h2>
+<pre><span class="k">Decks/</span>
+├── START-HERE.md                 <span class="c">← open this first</span>
+├── CLAUDE.md                     <span class="c">← rules Claude follows in this folder</span>
+├── CHANGELOG.md                  <span class="c">← every template change, newest first</span>
+│
+├── <span class="k">00_Guide/</span>                     <span class="c">how-to guides</span>
+│   ├── 01_Build-Guide.md         <span class="c">step-by-step process</span>
+│   ├── 02_Intake-Questionnaire.md                  <span class="c">Leasing questions</span>
+│   ├── 02_Intake-Questionnaire-Capital-Markets.md  <span class="c">Capital Markets questions</span>
+│   ├── 03_Claude-Prompts.md      <span class="c">copy-paste prompts</span>
+│   ├── 04_Section-Reference.md   <span class="c">where every element lives</span>
+│   ├── 05_QC-and-Update-Checklist.md
+│   ├── 06_Publish-to-Netlify.md
+│   └── 07_Asset-Specs.md         <span class="c">image + video sizes</span>
+│
+├── <span class="k">01_Templates/</span>                 <span class="c">starting points — never edit for one deck</span>
+│   ├── <span class="k">Leasing/</span>                  <span class="c">v2.2 · locked</span>
+│   │   ├── TEMPLATE-INFO.md
+│   │   ├── index.html · css/ · js/ · assets/
+│   └── <span class="k">Capital-Markets/</span>          <span class="c">v0.1 draft, copied from Leasing</span>
+│
+├── <span class="k">02_Brand-Library/</span>             <span class="c">logo, fonts, colors, partner + deal logos, awards, backgrounds</span>
+├── <span class="k">03_Team-Library/</span>              <span class="c">headshots + team-roster.md</span>
+│
+├── <span class="k">04_Decks/</span>                     <span class="c">one folder per pitch</span>
+│   ├── _DECK-TEMPLATE/           <span class="c">blank copied by new-deck.sh</span>
+│   └── <span class="k">2026-10_tampa-retail-landlord-rep/</span>
+│       ├── DECK-INFO.md          <span class="c">status, template, live URL</span>
+│       ├── CHANGELOG.md          <span class="c">v1.0 → v1.16</span>
+│       ├── 00_Intake/            <span class="c">intake.md, meeting notes</span>
+│       ├── 01_Property-Photos/   <span class="c">raw/ · web-ready/</span>
+│       ├── 02_Video/             <span class="c">videos.md (Vimeo numbers)</span>
+│       ├── 03_Data/              <span class="c">placer-ai · demographics · financials · sales-comps · sources.md</span>
+│       ├── 04_Copy/              <span class="c">copy-deck.md (approved words)</span>
+│       ├── <span class="k">05_Site/</span>              <span class="c">the website — this is what you publish</span>
+│       ├── 06_Exports/           <span class="c">netlify-upload.zip · pdf · screenshots</span>
+│       └── 07_Feedback/          <span class="c">feedback-log.md + sign-off</span>
+│
+├── <span class="k">05_Archive/</span>
+│   └── Template-Snapshots/       <span class="c">Leasing_v2.0 · Leasing_v2.2 (roll back from here)</span>
+│
+└── <span class="k">tools/</span>
+    ├── new-deck.sh  · preview.sh · check-deck.py · unbundle.py · theme.js</pre>
+    </section>
+
+    <section id="files">
+      <div class="ey">Site files</div>
+      <h2>Seven files run the <em>whole page.</em></h2>
+      <p>Plain HTML, CSS and JavaScript. No build step and no framework: open <code>index.html</code>, edit, refresh.</p>
+      <div class="tbl"><table>
+        <thead><tr><th>File</th><th>Lines</th><th>What it does</th><th>Edit it for</th></tr></thead>
+        <tbody>
+          <tr><td><code>index.html</code></td><td class="n">1,131</td><td>Every word, link, photo and video on the page, section by section</td><td>All content changes</td></tr>
+          <tr><td><code>css/styles.css</code></td><td class="n">580</td><td>Layout, brand colors (<code>:root</code>), sizes per section, the pattern backdrops, label style</td><td>Spacing, colors, sizes</td></tr>
+          <tr><td><code>css/motion.css</code></td><td class="n">38</td><td>Animation styles: opening, cursor, side rail, sheen, kinetic band</td><td>Rarely</td></tr>
+          <tr><td><code>css/fonts.css</code></td><td class="n">454</td><td>Libre Baskerville + Open Sans, self-hosted</td><td>Never</td></tr>
+          <tr><td><code>js/main.js</code></td><td class="n">262</td><td>Nav, 3D carousel, video autoplay on view, pinned Process tabs, logo color</td><td>Rarely</td></tr>
+          <tr><td><code>js/motion.js</code></td><td class="n">735</td><td>Opening sequence, smooth scroll, arrow-key and clicker stops, side rail, reveals, counters</td><td>Adding a new section (<code>var CH</code>)</td></tr>
+          <tr><td><code>js/theme.js</code></td><td class="n">78</td><td>Palette, headline style, section spacing and per-section padding exceptions</td><td>Switching look; spacing</td></tr>
+          <tr><td><code>assets/</code></td><td class="n">61 files</td><td><code>img/</code> backgrounds, brand, team, logos, maps, patterns, properties · <code>video/</code> · <code>fonts/</code></td><td>Swapping photos (same file name = no code change)</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section id="anatomy">
+      <div class="ey">Page anatomy</div>
+      <h2>Eleven sections, <em>top to bottom.</em></h2>
+      <div class="strip">
+        <div>
+          <div class="bars" role="img" aria-label="Page sections drawn to their height on a 1440 px screen">
+            <div class="bar d" style="height:46px">Hero</div>
+            <div class="bar l" style="height:32px">Advantage</div>
+            <div class="bar l" style="height:37px">Nat'l Reach</div>
+            <div class="bar d" style="height:13px">Band</div>
+            <div class="bar l" style="height:43px">Team</div>
+            <div class="bar l pin" style="height:157px">Platforms</div>
+            <div class="bar d" style="height:42px">Markets</div>
+            <div class="bar l" style="height:42px">Results</div>
+            <div class="bar d pin" style="height:157px">Process</div>
+            <div class="bar d" style="height:65px">Timeline</div>
+            <div class="bar l" style="height:59px">Website</div>
+            <div class="bar d" style="height:38px">Contact</div>
+          </div>
+          <div class="legend" style="margin-top:12px"><span><i style="background:var(--dark-block)"></i>Navy section</span><span><i style="background:var(--light-block)"></i>Light section</span><span><i style="background:repeating-linear-gradient(135deg,transparent 0 3px,rgba(198,216,59,.6) 3px 4px)"></i>Pinned scroll</span></div>
+          <p style="font-size:12px;color:var(--muted);margin-top:8px">Drawn to scale: 18,244 px total on a 1440 px laptop.</p>
+        </div>
+        <div class="tbl"><table>
+          <thead><tr><th>Section</th><th>Find in index.html</th><th>Holds</th><th>Behavior</th></tr></thead>
+          <tbody>
+            <tr><td>Opening</td><td><code>id="m-intro"</code></td><td>Logo, tagline, 0–100% counter</td><td>Pattern draws outward, dissolves</td></tr>
+            <tr><td>Nav</td><td><code>&lt;nav id="nav"&gt;</code></td><td>Logo (→ franklinst.com), 7 links, Contact</td><td>Turns white on scroll</td></tr>
+            <tr><td>Hero</td><td><code>══ HERO</code></td><td>3-line headline, subhead, 4 award chips, stat card</td><td>Words slide up; counter</td></tr>
+            <tr><td>Advantage</td><td><code>══ ADVANTAGE</code></td><td>Text card, values, Vimeo video</td><td>Video plays on view</td></tr>
+            <tr><td>National Reach</td><td><code>══ RESULTS</code></td><td>US map, 6 platform stats</td><td>Map reveals; numbers count</td></tr>
+            <tr><td>Kinetic band</td><td><code>KINETIC TYPE BAND</code></td><td>Two rows of scrolling words</td><td>Moves with scroll</td></tr>
+            <tr><td>Team</td><td><code>══ TEAM</code></td><td>3 people, recognition row</td><td>Photos wipe in</td></tr>
+            <tr><td>Platforms</td><td><code>══ PLATFORMS</code></td><td>5 tabs, each with video + copy</td><td>Pinned: scroll steps tabs</td></tr>
+            <tr><td>Markets</td><td><code>══ MARKET</code></td><td>Partner + deal logo rows, FL map with dots</td><td>Marquees; radar on map</td></tr>
+            <tr><td>Results That Speak</td><td><code>ASSIGNMENTS</code></td><td>3D carousel of 5 property cards + dots</td><td>Arrows, dots, keys</td></tr>
+            <tr><td>Process</td><td><code>══ PROCESS</code></td><td>5 tabs, each with headline + 3 points</td><td>Pinned; day → dusk photo</td></tr>
+            <tr><td>Timeline</td><td><code>══ SERVICE TIMELINE</code></td><td>Weeks 1–5+, action checklists</td><td>Weeks light up in order</td></tr>
+            <tr><td>Website</td><td><code>══ LIVE WEBSITE</code></td><td>Buildout listings window, green exit button, 3 callouts</td><td>Live listings</td></tr>
+            <tr><td>Contact</td><td><code>══ CTA</code></td><td>Headline, consultation email, 3 contact cards, office</td><td>Rings; cards rise</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </section>
+
+    <section id="html">
+      <div class="ey">HTML patterns</div>
+      <h2>Copy a block, <em>change the words.</em></h2>
+      <p>Every section repeats a few patterns. Keep the class names; change text, links, image paths and counts.</p>
+      <h3>Section heading (all sections)</h3>
+<pre><span class="c">&lt;!-- label: bold Arial, green dash added by CSS --&gt;</span>
+&lt;div class="ey r"&gt;Leasing Strategy&lt;/div&gt;
+<span class="c">&lt;!-- &lt;em&gt; = the green/teal italic word --&gt;</span>
+&lt;h2 class="proc-h2 r"&gt;Our &lt;em&gt;Process.&lt;/em&gt;&lt;/h2&gt;</pre>
+      <h3>Carousel card (Results That Speak)</h3>
+<pre>&lt;div class="c3d" data-i=<span class="s">"5"</span>&gt;            <span class="c">← 0,1,2… no gaps; first card also has "active"</span>
+  &lt;div class="c3d-inner"&gt;
+    &lt;div class="c3d-img" style="padding:0;"&gt;
+      &lt;span class="c3d-tag"&gt;Grocery-Anchored&lt;/span&gt;
+      &lt;img src=<span class="s">"assets/img/properties/new-property.jpg"</span> alt="New Property" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"&gt;
+    &lt;/div&gt;
+    &lt;div class="c3d-body"&gt;
+      &lt;div class="c3d-loc"&gt;Tampa, FL&lt;/div&gt;
+      &lt;h3 class="c3d-title"&gt;New Property&lt;/h3&gt;
+      &lt;p class="c3d-desc"&gt;One or two sentences on the result.&lt;/p&gt;
+      &lt;div class="c3d-pills"&gt;&lt;span class="c3d-pill"&gt;Publix&lt;/span&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+<span class="c">&lt;!-- plus one dot per card --&gt;</span>
+&lt;button class="c3d-dot" onclick=<span class="s">"setCard(5)"</span>&gt;&lt;/button&gt;</pre>
+      <h3>Pinned tab + panel (Platforms, Process)</h3>
+<pre>&lt;button class="plat-tab" data-panel=<span class="s">"2"</span> onclick=<span class="s">"goPlatform(2)"</span>&gt;…&lt;/button&gt;   <span class="c">← tab N</span>
+&lt;div class="plat-panel" data-panel=<span class="s">"2"</span>&gt;                              <span class="c">← panel N (same number)</span>
+  &lt;div class="plat-media"&gt;
+    &lt;iframe class="js-vimeo" src=<span class="s">"https://player.vimeo.com/video/<span class="k">1074088936</span>?…"</span>&gt;&lt;/iframe&gt;  <span class="c">← swap the number</span>
+  &lt;/div&gt;
+  …
+&lt;/div&gt;</pre>
+      <h3>Look &amp; spacing switch (js/theme.js)</h3>
+<pre>var DECK_THEME = { palette: <span class="s">'teal'</span>, typeStyle: <span class="s">'editorial'</span>, energy: <span class="s">'refined'</span> };
+var PAD_OVERRIDES = {            <span class="c">// per-section spacing exceptions (px)</span>
+  advantage:   { bottom: 24 },
+  results:     { top: 80 },
+  assignments: { bottom: 48 },
+  process:     { top: 0 }
+};</pre>
+    </section>
+
+    <section id="flow">
+      <div class="ey">Deck workflow</div>
+      <h2>Template to live link in <em>five steps.</em></h2>
+      <div class="flow">
+        <div class="step"><span class="num">1</span><b>Start</b><span>Copies a template and a blank deck folder</span><code>new-deck.sh "Name" Leasing</code></div>
+        <div class="step"><span class="num">2</span><b>Intake</b><span>Answer the template's questions; Claude can interview you</span><code>00_Intake/intake.md</code></div>
+        <div class="step"><span class="num">3</span><b>Copy &amp; build</b><span>Approve words, then edit the site</span><code>04_Copy · 05_Site</code></div>
+        <div class="step"><span class="num">4</span><b>QC</b><span>Fix every error, walk the checklist</span><code>check-deck.py</code></div>
+        <div class="step"><span class="num">5</span><b>Publish</b><span>Drag the zip or 05_Site onto Netlify</span><code>06_Exports/*.zip</code></div>
+      </div>
+    </section>
+
+    <section id="rules">
+      <div class="ey">Rules to remember</div>
+      <h2>Easy to miss, <em>caught by QC.</em></h2>
+      <div class="rules">
+        <div class="rule"><b>Never edit a template for one deck</b><span>Work in the deck's <code>05_Site</code>. Template changes are for every future deck, logged in <code>CHANGELOG.md</code>.</span></div>
+        <div class="rule"><b>Tabs and panels match by number</b><span>Add or remove both, then renumber from 0 (<code>data-panel</code>, <code>goPlatform(n)</code>, <code>panel-n</code>).</span></div>
+        <div class="rule"><b>One dot per carousel card</b><span><code>data-i</code> runs 0, 1, 2 with no gaps; only the first card is <code>active</code>.</span></div>
+        <div class="rule"><b>Logo rows list every logo twice</b><span>That makes the loop seamless; edit both halves.</span></div>
+        <div class="rule"><b>"N Actions" must match the list</b><span>Each timeline badge counts its checklist items.</span></div>
+        <div class="rule"><b>New section → add it to the rail</b><span>Add <code>['id','Label']</code> to <code>var CH</code> in <code>js/motion.js</code> so the side dots and clicker stop there.</span></div>
+        <div class="rule"><b>Same file name, no code change</b><span>Replace <code>hero-bg.jpg</code> with a new photo of the same name and size (see Asset Specs).</span></div>
+        <div class="rule"><b>Never invent numbers</b><span>Mark unknowns <code>TBD</code>; the QC check blocks publishing until they're filled.</span></div>
+      </div>
+    </section>
+
+    <section id="cm">
+      <div class="ey">Capital Markets next</div>
+      <h2>Same design, <em>new story.</em></h2>
+      <p><code>01_Templates/Capital-Markets/</code> is a copy of Leasing v2.2. Its <code>TEMPLATE-INFO.md</code> maps each section to its capital markets version; the intake questions add the asset, pricing and underwriting, buyers and lenders, and closed transactions.</p>
+      <div class="tbl"><table>
+        <thead><tr><th>Leasing section</th><th>Becomes</th></tr></thead>
+        <tbody>
+          <tr><td>Hero: Landlord Retail Leasing</td><td>Capital markets headline; sales volume, transactions, years</td></tr>
+          <tr><td>Platforms (5 tabs)</td><td>Offering Memorandum · Virtual Data Room · Market Video · Buyer Targeting · Email &amp; Social</td></tr>
+          <tr><td>Markets logos</td><td>Buyer, lender and sold-deal logos; map of closed transactions</td></tr>
+          <tr><td>Results That Speak</td><td>Recent Transactions: price, $/SF, cap rate, buyer type, days to close</td></tr>
+          <tr><td>Our Process</td><td>Valuation · Positioning &amp; OM · Launch · Offers · Due Diligence &amp; Closing</td></tr>
+          <tr><td>Service Timeline</td><td>Prep → Launch → Tours → Call for Offers → Best &amp; Final → Contract → Close</td></tr>
+          <tr><td>Live Website</td><td>Buildout for-sale listings, or remove</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+  </main>
+</div>
+
+</body></html>

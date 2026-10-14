@@ -1,0 +1,4 @@
+# macOS
+.DS_Store
+# build outputs (recreate with: cd 04_Decks/<deck>/05_Site && zip -r ../06_Exports/netlify-upload.zip .)
+*.zip
